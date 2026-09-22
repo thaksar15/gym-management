@@ -10,6 +10,7 @@ function Login(){
     });
 
     const[isLoggedIn,setIsLoggedIn] = useState(false);
+    const[userRole,setUserRole] = useState("");
 
     function handleChange(event){
         const{ name,value} = event.target;
@@ -20,23 +21,43 @@ function Login(){
         });
     }
 
-    function handleLogin(){
-        if (formData.email === "" || formData.password === ""){
-            alert("Please enter email and password");
-        }
-        else if(formData.email==="admin@gmail.com" && formData.password === "admin@123"){
-            alert("Login successful");
-            setIsLoggedIn(true);
-        }
+    async function handleLogin(){
 
-        else{
-            alert("Invalid email or password");
-        }
+    if (formData.email === "" || formData.password === ""){
+        alert("Please enter email and password");
+        return;
     }
+
+    try {
+        const response = await fetch("http://localhost:5000/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(formData)
+        });
+
+       const data = await response.json();
+
+       if (response.ok) {
+    alert(data.message);
+    setUserRole(data.role);
+    setIsLoggedIn(true);
+}
+
+    } catch (error) {
+        alert("Cannot connect to server");
+        console.log(error);
+    }
+}
 
     if(isLoggedIn){
-        return<MemberDashboard />;
+    if(userRole === "TRAINER"){
+        return <TrainerDashboard />;
     }
+
+    return <MemberDashboard />;
+}
     return(
         <div className="login-container">
             <h1>Gym Management System</h1>

@@ -13,3 +13,23 @@ router.post("/users", async (req, res) => {
     res.send("User created successfully");
 });
 module.exports = router;
+
+router.post("/login", async (req, res) => {
+
+    const { email, password } = req.body;
+
+    const user = await User.findOne({
+        email: email,
+        password: password
+    });
+
+    if (user) {
+    res.json({
+        message: "Login successful",
+        role: user.role
+    });
+} else {
+        res.status(401).send("Invalid email or password");
+    }
+
+});
