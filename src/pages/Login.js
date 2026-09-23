@@ -58,8 +58,11 @@ function Login(){
 
     return <MemberDashboard />;
 }
-    return(
-        <div className="login-container">
+return(
+    <form className="login-container" onSubmit={(event) => {
+        event.preventDefault();
+        handleLogin();
+    }}>
             <h1>Gym Management System</h1>
             <h2>Login</h2>
 
@@ -86,7 +89,8 @@ function Login(){
             <br /><br />
             <button  onClick = {handleLogin}>Login</button> 
           
-        </div>
+        </form>
+        
     );
 }
 
