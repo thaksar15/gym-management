@@ -10,10 +10,20 @@ function Login(){
         password: ""
     });
 
-    const[isLoggedIn,setIsLoggedIn] = useState(false);
-    const[userRole,setUserRole] = useState("");
-    const[userName,setUserName] = useState("");
-    const[userEmail,setUserEmail] = useState("");
+   const[isLoggedIn,setIsLoggedIn] = useState(
+    localStorage.getItem("isLoggedIn") === "true"
+);
+    const[userRole,setUserRole] = useState(
+    localStorage.getItem("userRole") || ""
+);
+
+const[userName,setUserName] = useState(
+    localStorage.getItem("userName") || ""
+);
+
+const[userEmail,setUserEmail] = useState(
+    localStorage.getItem("userEmail") || ""
+);
 
     function handleChange(event){
 
@@ -31,6 +41,11 @@ function Login(){
         setUserRole("");
         setUserName("");
         setUserEmail("");
+
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("userRole");
+        localStorage.removeItem("userName");
+        localStorage.removeItem("userEmail");
     }
 
     async function handleLogin(){
@@ -65,6 +80,10 @@ function Login(){
                     password: ""
                 });
 
+                localStorage.setItem("isLoggedIn", "true");
+                localStorage.setItem("userRole", data.role);
+                localStorage.setItem("userName", data.name);
+                localStorage.setItem("userEmail", formData.email);
                 setIsLoggedIn(true);
             }
 

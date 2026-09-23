@@ -6,10 +6,18 @@ import ViewReports from "./ViewReports.js";
 import "../styles/TrainerDashboard.css";
 
 function TrainerDashboard({onLogout}){
-    const[showViewMem,setShowViewMem] = useState(false);
-    const[showAssignDiet,setShowAssignDiet] = useState(false);
-    const[showAssignWork,setShowAssignWork] = useState(false);
-    const[showViewRep,setShowViewRep] = useState(false);
+    const[showViewMem,setShowViewMem] = useState(
+    localStorage.getItem("trainerPage") === "members"
+);
+    const[showAssignDiet,setShowAssignDiet] = useState(
+    localStorage.getItem("trainerPage") === "assignDiet"
+);
+    const[showAssignWork,setShowAssignWork] = useState(
+    localStorage.getItem("trainerPage") === "assignWorkout"
+);
+    const[showViewRep,setShowViewRep] = useState(
+    localStorage.getItem("trainerPage") === "reports"
+);
 
     if(showViewMem){
         return<ViewMembers backFromViewMem={backFromViewMem} />;
@@ -28,20 +36,24 @@ function TrainerDashboard({onLogout}){
     }
 
     function backFromViewMem(){
-        setShowViewMem(false);
-    }
+    localStorage.removeItem("trainerPage");
+    setShowViewMem(false);
+}
 
-    function backFromAssignDiet(){
-        setShowAssignDiet(false);
-    }
+   function backFromAssignDiet(){
+    localStorage.removeItem("trainerPage");
+    setShowAssignDiet(false);
+}
 
     function backFromAssignWork(){
-        setShowAssignWork(false);
-    }
+    localStorage.removeItem("trainerPage");
+    setShowAssignWork(false);
+}
 
-    function backFromViewRep(){
-        setShowViewRep(false);
-    }
+   function backFromViewRep(){
+    localStorage.removeItem("trainerPage");
+    setShowViewRep(false);
+}
 
     return(
         <div className="trainer-dashboard">
@@ -57,21 +69,41 @@ function TrainerDashboard({onLogout}){
 
             <div className="trainer-dashboard-buttons">
 
-                <button onClick={() => setShowViewMem(true)}>
-                    View Members
-                </button>
+                <button
+    onClick={() => {
+        localStorage.setItem("trainerPage", "members");
+        setShowViewMem(true);
+    }}
+>
+    View Members
+</button>
 
-                <button onClick={() => setShowAssignDiet(true)}>
-                    Assign Diet
-                </button>
+          <button
+    onClick={() => {
+        localStorage.setItem("trainerPage", "assignDiet");
+        setShowAssignDiet(true);
+    }}
+>
+    Assign Diet
+</button>     
 
-                <button onClick={() => setShowAssignWork(true)}>
-                    Assign Workout
-                </button>
+        <button
+    onClick={() => {
+        localStorage.setItem("trainerPage", "assignWorkout");
+        setShowAssignWork(true);
+    }}
+>
+    Assign Workout
+</button>
 
-                <button onClick={() => setShowViewRep(true)}>
-                    View Reports
-                </button>
+             <button
+    onClick={() => {
+        localStorage.setItem("trainerPage", "reports");
+        setShowViewRep(true);
+    }}
+>
+    View Reports
+</button>
                 <button onClick={onLogout}>Logout</button>
 
             </div>

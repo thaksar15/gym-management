@@ -8,12 +8,24 @@ import Diet from "./Diet.js";
 import WeeklyReport from "./WeeklyReport.js";
 
 function MemberDashboard({userName, userEmail, onLogout}){
-    const[showMembership,setShowMembership] = useState(false);
-    const[showPayments,setShowPayments] = useState(false);
-    const[showTrainer,setShowTrainer] = useState(false);
-    const[showSchedule,setShowSchedule] = useState(false);
-    const[showDiet,setShowDiet] = useState(false);
-    const[showWeekly,setShowWeekly] = useState(false);
+    const[showMembership,setShowMembership] = useState(
+    localStorage.getItem("memberPage") === "membership"
+);
+   const[showPayments,setShowPayments] = useState(
+    localStorage.getItem("memberPage") === "payments"
+);
+    const[showTrainer,setShowTrainer] = useState(
+    localStorage.getItem("memberPage") === "trainer"
+);
+    const[showSchedule,setShowSchedule] = useState(
+    localStorage.getItem("memberPage") === "schedule"
+);
+    const[showDiet,setShowDiet] = useState(
+    localStorage.getItem("memberPage") === "diet"
+);
+    const[showWeekly,setShowWeekly] = useState(
+    localStorage.getItem("memberPage") === "weekly"
+);
 
 
     if(showMembership){
@@ -40,29 +52,34 @@ function MemberDashboard({userName, userEmail, onLogout}){
         return<WeeklyReport backFromWeekly = {backFromWeekly} />;
     }
 
-    function backFromMem(){
-        setShowMembership(false);
-    }
+   function backFromMem(){
+    localStorage.removeItem("memberPage");
+    setShowMembership(false);
+}
 
     function backFromPay(){
-        setShowPayments(false);
-    }
+    localStorage.removeItem("memberPage");
+    setShowPayments(false);
+}
 
     function backFromTrain(){
-        setShowTrainer(false);
-    }
-
+    localStorage.removeItem("memberPage");
+    setShowTrainer(false);
+}
     function backFromSched(){
-        setShowSchedule(false);
-    }
+    localStorage.removeItem("memberPage");
+    setShowSchedule(false);
+}
 
     function backFromDiet(){
-        setShowDiet(false);
-    }
+    localStorage.removeItem("memberPage");
+    setShowDiet(false);
+}
 
     function backFromWeekly(){
-        setShowWeekly(false);
-    }
+    localStorage.removeItem("memberPage");
+    setShowWeekly(false);
+}
    return(
     <div className="member-dashboard">
         <h1>Member Dashboard</h1>
@@ -76,12 +93,54 @@ function MemberDashboard({userName, userEmail, onLogout}){
 </div>
 
         <div className="dashboard-buttons">
-            <button onClick={() => setShowMembership(true)}>Membership</button>
-            <button onClick={() => setShowPayments(true)}>Payments</button>
-            <button onClick={() => setShowTrainer(true)}>Trainer</button>
-            <button onClick={() => setShowSchedule(true)}>Schedule</button>
-            <button onClick={() => setShowDiet(true)}>Diet</button>
-            <button onClick={() => setShowWeekly(true)}>Weekly Report</button>
+            <button
+    onClick={() => {
+        localStorage.setItem("memberPage", "membership");
+        setShowMembership(true);
+    }}
+>
+    Membership
+</button>
+           <button
+    onClick={() => {
+        localStorage.setItem("memberPage", "payments");
+        setShowPayments(true);
+    }}
+>
+    Payments
+</button>
+            <button
+    onClick={() => {
+        localStorage.setItem("memberPage", "trainer");
+        setShowTrainer(true);
+    }}
+>
+    Trainer
+</button>
+            <button
+    onClick={() => {
+        localStorage.setItem("memberPage", "schedule");
+        setShowSchedule(true);
+    }}
+>
+    Schedule
+</button>
+            <button
+    onClick={() => {
+        localStorage.setItem("memberPage", "diet");
+        setShowDiet(true);
+    }}
+>
+    Diet
+</button>
+           <button
+    onClick={() => {
+        localStorage.setItem("memberPage", "weekly");
+        setShowWeekly(true);
+    }}
+>
+    Weekly Report
+</button>
             <button onClick={onLogout}>Logout</button>
         </div>
     </div>
