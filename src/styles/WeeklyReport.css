@@ -1,0 +1,76 @@
+.weekly-page {
+    min-height: 100vh;
+    padding: 50px;
+    background-color: #0b0b0b;
+    color: white;
+    text-align: center;
+}
+
+.weekly-page h1 {
+    font-size: 38px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.weekly-page h2 {
+    color: #aaa;
+    font-size: 20px;
+    margin-bottom: 35px;
+    text-align: left;
+}
+
+.weekly-card {
+    max-width: 650px;
+    margin: 0 auto 25px;
+    padding: 30px;
+    background-color: #181818;
+    border: 1px solid #333;
+    border-left: 5px solid #ed1c24;
+    border-radius: 12px;
+    text-align: left;
+}
+
+.weekly-card h3 {
+    margin: 0 0 20px;
+    font-size: 26px;
+    color: #ffcc00;
+}
+
+.weekly-card p {
+    margin: 0;
+    padding: 9px 0;
+    border-bottom: 1px solid #333;
+    color: #cccccc;
+    font-size: 16px;
+}
+
+.weekly-card p:last-child {
+    border-bottom: none;
+}
+
+.weekly-card .report-highlight {
+    margin-top: 15px;
+    color: white;
+    font-weight: bold;
+}
+
+.weekly-card .progress-message {
+    margin-top: 15px;
+    color: #ffcc00;
+    font-weight: bold;
+}
+
+.weekly-page button {
+    padding: 12px 25px;
+    background-color: #ed1c24;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.weekly-page button:hover {
+   background-color: #222;
+    border:#444 solid 1px;
+}

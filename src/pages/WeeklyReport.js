@@ -1,27 +1,47 @@
+import "../styles/WeeklyReport.css";
+
 function WeeklyReport({backFromWeekly}){
     return(
-        <div>
+        <div className="weekly-page">
+
             <h1>Weekly Report</h1>
-            <p>
-Week: 14–20 September<br /><br />
+            <h2>14–20 September 2026</h2>
 
-14 September — Present<br />
-15 September — Absent<br />
-16 September — Present<br />
-17 September — Present<br />
-18 September — Present<br />
-19 September — Absent<br />
-20 September — Present<br />
-<br />
-Attendance: 5/7 days<br />
+            <div className="weekly-card">
 
-Weight: 72 kg<br />
-Calories Burned: 1850 kcal<br /><br />
+                <h3>Attendance</h3>
 
-Progress:<br />
-Good consistency this week. Keep it up! 💪
-            </p>
-            <button onClick = {backFromWeekly}>Back to Dashboard</button>
+                <p>14 September — Present</p>
+                <p>15 September — Absent</p>
+                <p>16 September — Present</p>
+                <p>17 September — Present</p>
+                <p>18 September — Present</p>
+                <p>19 September — Absent</p>
+                <p>20 September — Present</p>
+
+                <p className="report-highlight">
+                    Attendance: 5/7 days
+                </p>
+
+            </div>
+
+            <div className="weekly-card">
+
+                <h3>Progress</h3>
+
+                <p><strong>Weight:</strong> 72 kg</p>
+                <p><strong>Calories Burned:</strong> 1850 kcal</p>
+
+                <p className="progress-message">
+                    Good consistency this week. Keep it up! 💪
+                </p>
+
+            </div>
+
+            <button onClick={backFromWeekly}>
+                Back to Dashboard
+            </button>
+
         </div>
     );
 }

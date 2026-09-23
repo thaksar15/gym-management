@@ -1,0 +1,58 @@
+.view-members-page {
+    min-height: 100vh;
+    padding: 50px;
+    background-color: #0b0b0b;
+    color: white;
+    text-align: center;
+}
+
+.view-members-page h1 {
+    font-size: 38px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.view-members-page h2 {
+    color: #aaa;
+    font-size: 20px;
+    margin-bottom: 35px;
+    text-align: left;
+}
+
+.member-card {
+    max-width: 600px;
+    margin: 0 auto 20px;
+    padding: 25px 30px;
+    background-color: #181818;
+    border: 1px solid #333;
+    border-left: 5px solid #ed1c24;
+    border-radius: 12px;
+    text-align: left;
+}
+
+.member-card h3 {
+    margin: 0 0 15px;
+    font-size: 25px;
+    color: #ffcc00;
+}
+
+.member-card p {
+    margin: 8px 0;
+    color: #cccccc;
+    font-size: 16px;
+}
+
+.view-members-page button {
+    padding: 12px 25px;
+    background-color: #ed1c24;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.view-members-page button:hover {
+    background-color: #222;
+    border:#444 solid 1px;
+}

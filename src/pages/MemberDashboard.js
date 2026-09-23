@@ -1,3 +1,4 @@
+import "../styles/MemberDashboard.css";
 import {useState} from "react";
 import Membership from "./Membership.js";
 import Payments from "./Payments.js";
@@ -6,7 +7,7 @@ import Schedule from "./Schedule.js";
 import Diet from "./Diet.js";
 import WeeklyReport from "./WeeklyReport.js";
 
-function MemberDashboard(){
+function MemberDashboard({userName, userEmail, onLogout}){
     const[showMembership,setShowMembership] = useState(false);
     const[showPayments,setShowPayments] = useState(false);
     const[showTrainer,setShowTrainer] = useState(false);
@@ -28,11 +29,11 @@ function MemberDashboard(){
     }
 
     if(showSchedule){
-        return<Schedule backFromSched = {backFromSched} />;
+        return<Schedule backFromSched = {backFromSched} userEmail={userEmail} />;
     }
 
     if(showDiet){
-        return<Diet backFromDiet = {backFromDiet}/>;
+        return<Diet backFromDiet={backFromDiet} userEmail={userEmail} />
     }
 
     if(showWeekly){
@@ -62,18 +63,29 @@ function MemberDashboard(){
     function backFromWeekly(){
         setShowWeekly(false);
     }
-    return(
-        <div>
+   return(
+    <div className="member-dashboard">
         <h1>Member Dashboard</h1>
-        <h2>Welcome, Member</h2>
-        <button onClick={() => setShowMembership(true)}>Membership</button>
-        <button onClick={() => setShowPayments(true)}>Payments</button>
-        <button onClick={() => setShowTrainer(true)}>Trainer</button>
-        <button onClick={() => setShowSchedule(true)}>Schedule</button>
-        <button onClick={() => setShowDiet(true)}>Diet</button>
-        <button onClick={() => setShowWeekly(true)}>Weekly Report</button>
+        <h2>Welcome, {userName}</h2>
+        
+
+<div className="dashboard-banner">
+    <img src="/images/gym3.png" alt="Gym interior" />
+    <h3>Stay Consistent. Stay Strong.</h3>
+    <p>Track your workouts, diet and progress in one place.</p>
+</div>
+
+        <div className="dashboard-buttons">
+            <button onClick={() => setShowMembership(true)}>Membership</button>
+            <button onClick={() => setShowPayments(true)}>Payments</button>
+            <button onClick={() => setShowTrainer(true)}>Trainer</button>
+            <button onClick={() => setShowSchedule(true)}>Schedule</button>
+            <button onClick={() => setShowDiet(true)}>Diet</button>
+            <button onClick={() => setShowWeekly(true)}>Weekly Report</button>
+            <button onClick={onLogout}>Logout</button>
         </div>
-    );
+    </div>
+);
 }
 
 export default MemberDashboard;

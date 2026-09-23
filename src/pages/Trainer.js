@@ -1,13 +1,26 @@
+import "../styles/Trainer.css";
+
 function Trainer({backFromTrain}){
     return(
-        <div>
+        <div className="trainer-page">
+
             <h1>Trainer</h1>
-       
-            <p>Name: Ram Yadav</p>
-            <p>Specialization: Bulk</p>
-            <p>Experience: 14 Years</p>
-            <p>Contact: 9892241813</p>
-            <button onClick = {backFromTrain}>Back to Dashboard</button>
+            <h2>Your assigned trainer</h2>
+
+            <div className="trainer-card">
+
+                <h3>Ram Yadav</h3>
+
+                <p><strong>Specialization:</strong> Bulk</p>
+                <p><strong>Experience:</strong> 14 Years</p>
+                <p><strong>Contact:</strong> 9892241813</p>
+
+            </div>
+
+            <button onClick={backFromTrain}>
+                Back to Dashboard
+            </button>
+
         </div>
     );
 }

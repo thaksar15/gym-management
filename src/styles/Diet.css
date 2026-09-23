@@ -1,0 +1,59 @@
+.diet-page {
+    min-height: 100vh;
+    padding: 50px;
+    background-color: #0b0b0b;
+    color: white;
+    text-align: center;
+}
+
+.diet-page h1 {
+    font-size: 38px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.diet-page h2 {
+    color: #aaa;
+    font-size: 20px;
+    margin-bottom: 35px;
+    text-align: left;
+}
+
+.diet-card {
+    max-width: 750px;
+    margin: 100px auto 20px;
+    padding: 1px 35px;
+
+    background-color: #181818;
+    border: 1px solid #333;
+    border-left: 6px solid #ed1c24;
+    border-radius: 14px;
+
+    text-align: left;
+}
+
+.diet-card pre {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    line-height: 2;
+    color: #ffcc00;
+    white-space: pre-wrap;
+}
+
+
+
+.diet-page button {
+    padding: 12px 25px;
+    background-color: #ed1c24;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.diet-page button:hover {
+    background-color: #222;
+    border:#444 solid 1px;
+}

@@ -1,23 +1,36 @@
+import "../styles/ViewMembers.css";
+
 function ViewMembers({backFromViewMem}){
     return(
-        <div>
+        <div className="view-members-page">
+
             <h1>Members</h1>
-            <p>
-1. Rahul Sharma<br />
-   Membership: Gold<br />
-   Status: Active<br /><br />
+            <h2>Gym Members</h2>
 
-2. Aditya Patil
-   Membership: Silver<br />
-   Status: Active<br /><br />
+            <div className="member-card">
+                <h3>Sarthak</h3>
+                <p><strong>Membership:</strong> Gold</p>
+                <p><strong>Status:</strong> Active</p>
+            </div>
 
-3. Rohan Mehta
-   Membership: Gold<br />
-   Status: Expired
-            </p>
-            <button onClick = {backFromViewMem}>Back to Dashboard</button>
+            <div className="member-card">
+                <h3>Aditya Patil</h3>
+                <p><strong>Membership:</strong> Silver</p>
+                <p><strong>Status:</strong> Active</p>
+            </div>
+
+            <div className="member-card">
+                <h3>Rohan Mehta</h3>
+                <p><strong>Membership:</strong> Gold</p>
+                <p><strong>Status:</strong> Expired</p>
+            </div>
+
+            <button onClick={backFromViewMem}>
+                Back to Dashboard
+            </button>
+
         </div>
-    );     
+    );
 }
 
 export default ViewMembers;
