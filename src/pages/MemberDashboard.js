@@ -29,7 +29,10 @@ function MemberDashboard({userName, userEmail, onLogout}){
 
 
     if(showMembership){
-        return<Membership backFromMem={backFromMem} />;
+        return<Membership
+    backFromMembership={backFromMembership}
+    userEmail={userEmail}
+/>
     }
 
     if(showPayments){
@@ -51,6 +54,11 @@ function MemberDashboard({userName, userEmail, onLogout}){
     if(showWeekly){
         return<WeeklyReport backFromWeekly = {backFromWeekly} />;
     }
+
+function backFromMembership() {
+    setShowMembership(false);
+    localStorage.removeItem("memberPage");
+}
 
    function backFromMem(){
     localStorage.removeItem("memberPage");

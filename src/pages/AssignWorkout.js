@@ -1,99 +1,204 @@
-import {useState} from "react";
+import { useEffect, useState } from "react";
 import "../styles/AssignWorkout.css";
 
-function AssignWorkout({backFromAssignWork}){
-    const [member, setMember] = useState("sarthakchitnis@gmail.com");
+function AssignWorkout({ backFromAssignWork }) {
+
+    const [members, setMembers] = useState([]);
+    const [selectedMember, setSelectedMember] = useState("");
+
     const [monday, setMonday] = useState("");
-const [wednesday, setWednesday] = useState("");
-const [friday, setFriday] = useState("");
-const [sunday, setSunday] = useState("");
+    const [tuesday, setTuesday] = useState("");
+    const [wednesday, setWednesday] = useState("");
+    const [thursday, setThursday] = useState("");
+    const [friday, setFriday] = useState("");
+    const [saturday, setSaturday] = useState("");
+    const [sunday, setSunday] = useState("");
 
-async function assignWorkout(){
+    useEffect(() => {
 
-    const workout = `
-Monday: ${monday}
-Wednesday: ${wednesday}
-Friday: ${friday}
-Sunday: ${sunday}
-`;
-
-    const response = await fetch(
-        `http://localhost:5000/users/${member}/workout`,
-        {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                workout: workout
+        fetch("http://localhost:5000/members")
+            .then(response => response.json())
+            .then(data => {
+                setMembers(data);
             })
-        }
-    );
+            .catch(error => {
+                console.log(error);
+            });
 
-    if(response.ok){
-        alert("Workout assigned successfully");
-    }else{
-        alert("Failed to assign workout");
+    }, []);
+
+    async function handleAssign() {
+
+        if (selectedMember === "") {
+            alert("Please select a member");
+            return;
+        }
+
+        const workout = `
+Monday:
+${monday}
+
+Tuesday:
+${tuesday}
+
+Wednesday:
+${wednesday}
+
+Thursday:
+${thursday}
+
+Friday:
+${friday}
+
+Saturday:
+${saturday}
+
+Sunday:
+${sunday}
+        `;
+
+        try {
+
+            const response = await fetch(
+                `http://localhost:5000/users/${selectedMember}/workout`,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        workout: workout
+                    })
+                }
+            );
+
+            const data = await response.json();
+
+            if (response.ok) {
+                alert(data.message);
+            } else {
+                alert("Failed to assign workout");
+            }
+
+        } catch (error) {
+
+            console.log(error);
+            alert("Cannot connect to server");
+
+        }
     }
-}
-    return(
-        
+
+    return (
+
         <div className="assign-workout-page">
 
             <h1>Assign Workout</h1>
-            <h2>Create a workout plan for your member</h2>
+             <h2>Weekly Workout Plan</h2>
 
-            <div className="workout-form">
+            <form
+                className="assign-workout-form"
+                onSubmit={(event) => {
+                    event.preventDefault();
+                    handleAssign();
+                }}
+            >
 
-                <label>Member Name</label>
+
+                <label>Select Member:</label>
+
                 <select
-    value={member}
-    onChange={(event) => setMember(event.target.value)}
->
-    <option value="sarthakchitnis@gmail.com">Sarthak</option>
-    <option value="aditya@gmail.com">Aditya Patil</option>
-    <option value="rohan@gmail.com">Rohan Mehta</option>
-</select>
+                    value={selectedMember}
+                    onChange={(event) => setSelectedMember(event.target.value)}
+                    required
+                >
 
-                <label>Monday</label>
-                <input
-                    type="text"
-                    placeholder="Enter Monday workout"
-                    value={monday}
-                    onChange={(event) => setMonday(event.target.value)}
-                />
+                    <option value="">
+                        Select a member
+                    </option>
 
-                <label>Wednesday</label>
-                <input
-                    type="text"
-                    placeholder="Enter Wednesday workout"
-                    value={wednesday}
-                    onChange={(event) => setWednesday(event.target.value)}
-                />
+                    {members.map((member) => (
 
-                <label>Friday</label>
-                <input
-                    type="text"
-                    placeholder="Enter Friday workout"
-                    value={friday}
-                    onChange={(event) => setFriday(event.target.value)}
-                />
+                        <option
+                            key={member._id}
+                            value={member.email}
+                        >
+                            {member.name}
+                        </option>
 
-                <label>Sunday</label>
-                <input
-                    type="text"
-                    placeholder="Enter Sunday workout"
-                    value={sunday}
-                    onChange={(event) => setSunday(event.target.value)}
-                />
+                    ))}
 
-                <button onClick={assignWorkout}>Assign Workout</button>
+                </select>
 
-            </div>
 
-            <button onClick={backFromAssignWork}>
-                Back to Dashboard
-            </button>
+               <label>Monday:</label>
+<input
+    type="text"
+    value={monday}
+    onChange={(event) => setMonday(event.target.value)}
+    placeholder="Enter Monday workout"
+/>
+
+<label>Tuesday:</label>
+<input
+    type="text"
+    value={tuesday}
+    onChange={(event) => setTuesday(event.target.value)}
+    placeholder="Enter Tuesday workout"
+/>
+
+<label>Wednesday:</label>
+<input
+    type="text"
+    value={wednesday}
+    onChange={(event) => setWednesday(event.target.value)}
+    placeholder="Enter Wednesday workout"
+/>
+
+<label>Thursday:</label>
+<input
+    type="text"
+    value={thursday}
+    onChange={(event) => setThursday(event.target.value)}
+    placeholder="Enter Thursday workout"
+/>
+
+<label>Friday:</label>
+<input
+    type="text"
+    value={friday}
+    onChange={(event) => setFriday(event.target.value)}
+    placeholder="Enter Friday workout"
+/>
+
+<label>Saturday:</label>
+<input
+    type="text"
+    value={saturday}
+    onChange={(event) => setSaturday(event.target.value)}
+    placeholder="Enter Saturday workout"
+/>
+
+<label>Sunday:</label>
+<input
+    type="text"
+    value={sunday}
+    onChange={(event) => setSunday(event.target.value)}
+    placeholder="Enter Sunday workout"
+/>
+
+
+                <button type="submit">
+                    Assign Workout
+                </button>
+
+                <button
+                    type="button"
+                    onClick={backFromAssignWork}
+                >
+                    Back to Dashboard
+                </button>
+
+            </form>
 
         </div>
     );

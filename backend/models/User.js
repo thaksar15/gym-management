@@ -26,7 +26,37 @@ const userSchema = new mongoose.Schema({
     workout: {
         type: String,
         default: ""
-    }
+    },
+
+    dob: {
+    type: String,
+    default: ""
+},
+
+age: {
+    type: Number,
+    default: 0
+},
+
+gender: {
+    type: String,
+    default: ""
+},
+
+weight: {
+    type: Number,
+    default: 0
+},
+
+membership: {
+    type: String,
+    default: ""
+},
+
+phone: {
+    type: String,
+    default: ""
+}
 
 });
 

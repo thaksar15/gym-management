@@ -1,24 +1,70 @@
+import { useEffect, useState } from "react";
 import "../styles/Membership.css";
 
-function Membership({backFromMem}){
-    return(
+function Membership({ backFromMembership, userEmail }) {
+
+    const [details, setDetails] = useState(null);
+
+    useEffect(() => {
+
+        fetch(`http://localhost:5000/users/${userEmail}/membership`)
+            .then(response => response.json())
+            .then(data => {
+                setDetails(data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+
+    }, [userEmail]);
+
+    if (!details) {
+        return <p>Loading membership details...</p>;
+    }
+
+    return (
+
         <div className="membership-page">
 
-            <h1>Membership</h1>
-            <h2>Here are your membership details</h2>
+            <h1>Membership Details</h1>
 
             <div className="membership-card">
 
-                <h3>Gold Membership</h3>
+                <p>
+                    <strong>Name:</strong> {details.name}
+                </p>
 
-                <p><strong>Start Date:</strong> 1 September 2026</p>
-                <p><strong>Expiry Date:</strong> 1 September 2027</p>
-                <p><strong>Status:</strong> <span>Active</span></p>
-                <p><strong>Amount:</strong> ₹12000</p>
+                <p>
+                    <strong>Email:</strong> {details.email}
+                </p>
+
+                <p>
+                    <strong>Date of Birth:</strong> {details.dob}
+                </p>
+
+                <p>
+                    <strong>Age:</strong> {details.age}
+                </p>
+
+                <p>
+                    <strong>Gender:</strong> {details.gender}
+                </p>
+
+                <p>
+                    <strong>Weight:</strong> {details.weight} kg
+                </p>
+
+                <p>
+                    <strong>Membership:</strong> {details.membership}
+                </p>
+
+                <p>
+                    <strong>Phone:</strong> {details.phone}
+                </p>
 
             </div>
 
-            <button onClick={backFromMem}>
+            <button onClick={backFromMembership}>
                 Back to Dashboard
             </button>
 

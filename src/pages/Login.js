@@ -1,41 +1,47 @@
 import "../styles/Login.css";
-import {useState} from "react";
+import { useState } from "react";
+import SignUp from "./SignUp.js";
 import MemberDashboard from "./MemberDashboard.js";
 import TrainerDashboard from "./TrainerDashboard.js";
 
-function Login(){
+function Login() {
 
-    const[formData,setFormData] = useState({
+    const [showSignUp, setShowSignUp] = useState(false);
+
+    const [formData, setFormData] = useState({
         email: "",
         password: ""
     });
 
-   const[isLoggedIn,setIsLoggedIn] = useState(
-    localStorage.getItem("isLoggedIn") === "true"
-);
-    const[userRole,setUserRole] = useState(
-    localStorage.getItem("userRole") || ""
-);
+    const [isLoggedIn, setIsLoggedIn] = useState(
+        localStorage.getItem("isLoggedIn") === "true"
+    );
 
-const[userName,setUserName] = useState(
-    localStorage.getItem("userName") || ""
-);
+    const [userRole, setUserRole] = useState(
+        localStorage.getItem("userRole") || ""
+    );
 
-const[userEmail,setUserEmail] = useState(
-    localStorage.getItem("userEmail") || ""
-);
+    const [userName, setUserName] = useState(
+        localStorage.getItem("userName") || ""
+    );
 
-    function handleChange(event){
+    const [userEmail, setUserEmail] = useState(
+        localStorage.getItem("userEmail") || ""
+    );
 
-        const{ name,value} = event.target;
+
+    function handleChange(event) {
+
+        const { name, value } = event.target;
 
         setFormData({
             ...formData,
-            [name]:value
+            [name]: value
         });
     }
 
-    function handleLogout(){
+
+    function handleLogout() {
 
         setIsLoggedIn(false);
         setUserRole("");
@@ -48,22 +54,26 @@ const[userEmail,setUserEmail] = useState(
         localStorage.removeItem("userEmail");
     }
 
-    async function handleLogin(){
 
-        if (formData.email === "" || formData.password === ""){
+    async function handleLogin() {
+
+        if (formData.email === "" || formData.password === "") {
             alert("Please enter email and password");
             return;
         }
 
         try {
 
-            const response = await fetch("http://localhost:5000/login", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(formData)
-            });
+            const response = await fetch(
+                "http://localhost:5000/login",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(formData)
+                }
+            );
 
             const data = await response.json();
 
@@ -84,6 +94,7 @@ const[userEmail,setUserEmail] = useState(
                 localStorage.setItem("userRole", data.role);
                 localStorage.setItem("userName", data.name);
                 localStorage.setItem("userEmail", formData.email);
+
                 setIsLoggedIn(true);
             }
 
@@ -95,10 +106,30 @@ const[userEmail,setUserEmail] = useState(
         }
     }
 
-    if(isLoggedIn){
 
-        if(userRole === "TRAINER"){
-            return <TrainerDashboard onLogout={handleLogout} />;
+    /* SHOW SIGNUP PAGE */
+
+    if (showSignUp) {
+
+        return (
+            <SignUp
+                onLogin={() => setShowSignUp(false)}
+            />
+        );
+    }
+
+
+    /* SHOW DASHBOARD */
+
+    if (isLoggedIn) {
+
+        if (userRole === "TRAINER") {
+
+            return (
+                <TrainerDashboard
+                    onLogout={handleLogout}
+                />
+            );
         }
 
         return (
@@ -110,7 +141,10 @@ const[userEmail,setUserEmail] = useState(
         );
     }
 
-    return(
+
+    /* SHOW LOGIN PAGE */
+
+    return (
 
         <form
             className="login-container"
@@ -131,6 +165,7 @@ const[userEmail,setUserEmail] = useState(
 
             </div>
 
+
             <div className="login-card">
 
                 <h2>Login</h2>
@@ -138,6 +173,7 @@ const[userEmail,setUserEmail] = useState(
                 <p className="login-description">
                     Log in to your account and keep your fitness journey on track.
                 </p>
+
 
                 <label>Email:</label>
 
@@ -149,6 +185,7 @@ const[userEmail,setUserEmail] = useState(
                     onChange={handleChange}
                 />
 
+
                 <label>Password:</label>
 
                 <input
@@ -159,8 +196,17 @@ const[userEmail,setUserEmail] = useState(
                     onChange={handleChange}
                 />
 
+
                 <button type="submit">
                     Login →
+                </button>
+
+
+                <button
+                    type="button"
+                    onClick={() => setShowSignUp(true)}
+                >
+                    Create Account
                 </button>
 
             </div>

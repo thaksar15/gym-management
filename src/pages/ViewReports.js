@@ -1,42 +1,71 @@
+import { useEffect, useState } from "react";
 import "../styles/ViewReports.css";
 
-function ViewReports({backFromViewRep}){
-    return(
+function ViewReports({ backFromViewRep }) {
+
+    const [members, setMembers] = useState([]);
+
+    useEffect(() => {
+
+        fetch("http://localhost:5000/members")
+            .then(response => response.json())
+            .then(data => {
+                setMembers(data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+
+    }, []);
+
+    return (
         <div className="view-reports-page">
 
             <h1>Member Reports</h1>
-            <h2>View member progress</h2>
 
-            <div className="report-card">
+            <div className="reports-container">
 
-                <h3>Sarthak</h3>
+                {members.map((member) => (
 
-                <p><strong>Attendance:</strong> 5/7 days</p>
-                <p><strong>Weight:</strong> 72 kg</p>
-                <p><strong>Calories Burned:</strong> 1850 kcal</p>
-                <p><strong>Progress:</strong> Good consistency</p>
+                    <div className="report-card" key={member._id}>
 
-            </div>
+                        <h2>{member.name}</h2>
 
-            <div className="report-card">
+                        <p>
+                            <strong>Email:</strong> {member.email}
+                        </p>
 
-                <h3>Aditya Patil</h3>
+                        <p>
+                            <strong>Age:</strong> {member.age}
+                        </p>
 
-                <p><strong>Attendance:</strong> 6/7 days</p>
-                <p><strong>Weight:</strong> 68 kg</p>
-                <p><strong>Calories Burned:</strong> 2100 kcal</p>
-                <p><strong>Progress:</strong> Excellent</p>
+                        <p>
+                            <strong>Gender:</strong> {member.gender}
+                        </p>
 
-            </div>
+                        <p>
+                            <strong>Weight:</strong> {member.weight} kg
+                        </p>
 
-            <div className="report-card">
+                        <p>
+                            <strong>Membership:</strong> {member.membership}
+                        </p>
 
-                <h3>Rohan Mehta</h3>
+                        <p>
+                            <strong>Diet:</strong>
+                        </p>
 
-                <p><strong>Attendance:</strong> 2/7 days</p>
-                <p><strong>Weight:</strong> 81 kg</p>
-                <p><strong>Calories Burned:</strong> 1200 kcal</p>
-                <p><strong>Progress:</strong> Needs improvement</p>
+                        <pre>{member.diet || "No diet assigned"}</pre>
+
+                        <p>
+                            <strong>Workout:</strong>
+                        </p>
+
+                        <pre>{member.workout || "No workout assigned"}</pre>
+
+                    </div>
+
+                ))}
 
             </div>
 

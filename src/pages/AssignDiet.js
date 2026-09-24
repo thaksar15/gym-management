@@ -1,107 +1,177 @@
-import {useState} from "react";
+import { useEffect, useState } from "react";
 import "../styles/AssignDiet.css";
 
-function AssignDiet({backFromAssignDiet}){
+function AssignDiet({ backFromAssignDiet }) {
 
-const [member, setMember] = useState("sarthakchitnis@gmail.com");
+    const [members, setMembers] = useState([]);
+    const [selectedMember, setSelectedMember] = useState("");
+
     const [breakfast, setBreakfast] = useState("");
+    const [midMorning, setMidMorning] = useState("");
     const [lunch, setLunch] = useState("");
-    const [snack, setSnack] = useState("");
+    const [eveningSnack, setEveningSnack] = useState("");
     const [dinner, setDinner] = useState("");
 
-    async function assignDiet(){
+    useEffect(() => {
+
+        fetch("http://localhost:5000/members")
+            .then(response => response.json())
+            .then(data => {
+                setMembers(data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+
+    }, []);
+
+    async function handleAssign() {
+
+        if (selectedMember === "") {
+            alert("Please select a member");
+            return;
+        }
 
         const diet = `
-Breakfast: ${breakfast}
-Lunch: ${lunch}
-Snack: ${snack}
-Dinner: ${dinner}
+Breakfast:
+${breakfast}
+
+Mid-Morning:
+${midMorning}
+
+Lunch:
+${lunch}
+
+Evening Snack:
+${eveningSnack}
+
+Dinner:
+${dinner}
         `;
 
-        const response = await fetch(
-            `http://localhost:5000/users/${member}/diet`,
-            {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    diet: diet
-                })
-            }
-        );
+        try {
 
-        if(response.ok){
-            alert("Diet assigned successfully");
-        }else{
-            alert("Failed to assign diet");
+            const response = await fetch(
+                `http://localhost:5000/users/${selectedMember}/diet`,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        diet: diet
+                    })
+                }
+            );
+
+            const data = await response.json();
+
+            if (response.ok) {
+                alert(data.message);
+            } else {
+                alert("Failed to assign diet");
+            }
+
+        } catch (error) {
+
+            console.log(error);
+            alert("Cannot connect to server");
+
         }
     }
 
-    return(
+    return (
+
         <div className="assign-diet-page">
 
             <h1>Assign Diet</h1>
-            <h2>Create a diet plan for your member</h2>
+            <h2>Daily Diet Plan</h2>
 
-            <div className="diet-form">
+            <form
+                className="assign-diet-form"
+                onSubmit={(event) => {
+                    event.preventDefault();
+                    handleAssign();
+                }}
+            >
 
-                <label>Member Name</label>
+                <label>Select Member:</label>
 
                 <select
-    value={member}
-    onChange={(event) => setMember(event.target.value)}
->
-    <option value="sarthakchitnis@gmail.com">Sarthak</option>
-    <option value="aditya@gmail.com">Aditya Patil</option>
-    <option value="rohan@gmail.com">Rohan Mehta</option>
-</select>
+                    value={selectedMember}
+                    onChange={(event) => setSelectedMember(event.target.value)}
+                    required
+                >
 
-                <label>Breakfast</label>
+                    <option value="">
+                        Select a member
+                    </option>
 
-                <input
-                    type="text"
-                    placeholder="Enter breakfast plan"
-                    value={breakfast}
-                    onChange={(event) => setBreakfast(event.target.value)}
-                />
+                    {members.map((member) => (
 
-                <label>Lunch</label>
+                        <option
+                            key={member._id}
+                            value={member.email}
+                        >
+                            {member.name}
+                        </option>
 
-                <input
-                    type="text"
-                    placeholder="Enter lunch plan"
-                    value={lunch}
-                    onChange={(event) => setLunch(event.target.value)}
-                />
+                    ))}
 
-                <label>Snack</label>
+                </select>
 
-                <input
-                    type="text"
-                    placeholder="Enter snack plan"
-                    value={snack}
-                    onChange={(event) => setSnack(event.target.value)}
-                />
+<label>Breakfast:</label>
+<input
+    type="text"
+    value={breakfast}
+    onChange={(event) => setBreakfast(event.target.value)}
+    placeholder="Enter breakfast"
+/>
 
-                <label>Dinner</label>
+<label>Mid-Morning:</label>
+<input
+    type="text"
+    value={midMorning}
+    onChange={(event) => setMidMorning(event.target.value)}
+    placeholder="Enter mid-morning meal"
+/>
 
-                <input
-                    type="text"
-                    placeholder="Enter dinner plan"
-                    value={dinner}
-                    onChange={(event) => setDinner(event.target.value)}
-                />
+<label>Lunch:</label>
+<input
+    type="text"
+    value={lunch}
+    onChange={(event) => setLunch(event.target.value)}
+    placeholder="Enter lunch"
+/>
 
-                <button onClick={assignDiet}>
+<label>Evening Snack:</label>
+<input
+    type="text"
+    value={eveningSnack}
+    onChange={(event) => setEveningSnack(event.target.value)}
+    placeholder="Enter evening snack"
+/>
+
+<label>Dinner:</label>
+<input
+    type="text"
+    value={dinner}
+    onChange={(event) => setDinner(event.target.value)}
+    placeholder="Enter dinner"
+/>
+
+                <button type="submit">
                     Assign Diet
                 </button>
 
-            </div>
+                <button
+                    type="button"
+                    onClick={backFromAssignDiet}
+                >
+                    Back to Dashboard
+                </button>
 
-            <button onClick={backFromAssignDiet}>
-                Back to Dashboard
-            </button>
+            </form>
 
         </div>
     );
