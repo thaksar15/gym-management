@@ -54,6 +54,10 @@ function Membership({ backFromMembership, userEmail }) {
                     <strong>Weight:</strong> {details.weight} kg
                 </p>
 
+                 <p>
+                    <strong>Height:</strong> {details.height} cm
+                </p>
+
                 <p>
                     <strong>Membership:</strong> {details.membership}
                 </p>

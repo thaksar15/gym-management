@@ -1,72 +1,67 @@
-import { useEffect, useState } from "react";
 import "../styles/ViewReports.css";
 
 function ViewReports({ backFromViewRep }) {
 
-    const [members, setMembers] = useState([]);
-
-    useEffect(() => {
-
-        fetch("http://localhost:5000/members")
-            .then(response => response.json())
-            .then(data => {
-                setMembers(data);
-            })
-            .catch(error => {
-                console.log(error);
-            });
-
-    }, []);
-
     return (
         <div className="view-reports-page">
 
-            <h1>Member Reports</h1>
+            <h1>Member Reports(Non Operational)</h1>
 
             <div className="reports-container">
 
-                {members.map((member) => (
+                <div className="report-card">
 
-                    <div className="report-card" key={member._id}>
+                    <h2>Sarthak Chitnis</h2>
 
-                        <h2>{member.name}</h2>
+                    <p>
+                        <strong>Attendance:</strong> 5/7 days
+                    </p>
 
-                        <p>
-                            <strong>Email:</strong> {member.email}
-                        </p>
+                    <p>
+                        <strong>14 September:</strong> Present
+                    </p>
 
-                        <p>
-                            <strong>Age:</strong> {member.age}
-                        </p>
+                    <p>
+                        <strong>15 September:</strong> Absent
+                    </p>
 
-                        <p>
-                            <strong>Gender:</strong> {member.gender}
-                        </p>
+                    <p>
+                        <strong>16 September:</strong> Present
+                    </p>
 
-                        <p>
-                            <strong>Weight:</strong> {member.weight} kg
-                        </p>
+                    <p>
+                        <strong>17 September:</strong> Present
+                    </p>
 
-                        <p>
-                            <strong>Membership:</strong> {member.membership}
-                        </p>
+                    <p>
+                        <strong>18 September:</strong> Present
+                    </p>
 
-                        <p>
-                            <strong>Diet:</strong>
-                        </p>
+                    <p>
+                        <strong>19 September:</strong> Absent
+                    </p>
 
-                        <pre>{member.diet || "No diet assigned"}</pre>
+                    <p>
+                        <strong>20 September:</strong> Present
+                    </p>
 
-                        <p>
-                            <strong>Workout:</strong>
-                        </p>
+                    <p>
+                        <strong>Weight:</strong> 72 kg
+                    </p>
 
-                        <pre>{member.workout || "No workout assigned"}</pre>
+                    <p>
+                        <strong>Calories Burned:</strong> 1850 kcal
+                    </p>
 
-                    </div>
+                    <p className="progress-message">
+                        Good consistency this week. Keep it up! 💪
+                    </p>
 
-                ))}
+                </div>
 
+               
+
+                
             </div>
 
             <button onClick={backFromViewRep}>

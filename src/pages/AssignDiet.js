@@ -5,9 +5,7 @@ function AssignDiet({ backFromAssignDiet }) {
 
     const [members, setMembers] = useState([]);
     const [selectedMember, setSelectedMember] = useState("");
-
     const [breakfast, setBreakfast] = useState("");
-    const [midMorning, setMidMorning] = useState("");
     const [lunch, setLunch] = useState("");
     const [eveningSnack, setEveningSnack] = useState("");
     const [dinner, setDinner] = useState("");
@@ -35,9 +33,6 @@ function AssignDiet({ backFromAssignDiet }) {
         const diet = `
 Breakfast:
 ${breakfast}
-
-Mid-Morning:
-${midMorning}
 
 Lunch:
 ${lunch}
@@ -126,14 +121,6 @@ ${dinner}
     value={breakfast}
     onChange={(event) => setBreakfast(event.target.value)}
     placeholder="Enter breakfast"
-/>
-
-<label>Mid-Morning:</label>
-<input
-    type="text"
-    value={midMorning}
-    onChange={(event) => setMidMorning(event.target.value)}
-    placeholder="Enter mid-morning meal"
 />
 
 <label>Lunch:</label>

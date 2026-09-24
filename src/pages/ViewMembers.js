@@ -57,6 +57,10 @@ function ViewMembers({ backFromViewMem }) {
                         </p>
 
                         <p>
+                            <strong>Height:</strong> {member.height} cm
+                        </p>
+
+                        <p>
                             <strong>Membership:</strong> {member.membership}
                         </p>
 

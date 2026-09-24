@@ -15,6 +15,7 @@ router.post("/users", async (req, res) => {
         age,
         gender,
         weight,
+        height,
         membership,
         phone
     } = req.body;
@@ -30,6 +31,7 @@ router.post("/users", async (req, res) => {
             age: age,
             gender: gender,
             weight: weight,
+            height: height,
             membership: membership,
             phone: phone
         });
@@ -140,6 +142,7 @@ router.get("/users/:email/membership", async (req, res) => {
             age: user.age,
             gender: user.gender,
             weight: user.weight,
+            height: user.height,
             membership: user.membership,
             phone: user.phone
         });

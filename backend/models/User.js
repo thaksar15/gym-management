@@ -48,6 +48,11 @@ weight: {
     default: 0
 },
 
+height: {
+    type: Number,
+    default: 0
+},
+
 membership: {
     type: String,
     default: ""

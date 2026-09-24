@@ -10,6 +10,7 @@ function SignUp({ onLogin }) {
         age: "",
         gender: "",
         weight: "",
+        height: "",
         membership: "",
         password: "",
         confirmPassword: "",
@@ -51,6 +52,7 @@ async function handleSubmit(event) {
                 age: formData.age,
                 gender: formData.gender,
                 weight: formData.weight,
+                height: formData.height,
                 membership: formData.membership,
                 phone: formData.phone
             })
@@ -124,6 +126,7 @@ async function handleSubmit(event) {
                     onChange={handleChange}
                     required
                 >
+                    <option value="selectAnOption">Select an option</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                     <option value="prefernot">
@@ -140,6 +143,15 @@ async function handleSubmit(event) {
                     required
                 />
 
+                <label>Height:</label>
+                <input
+                    type="number"
+                    name="height"
+                    value={formData.height}
+                    onChange={handleChange}
+                    required
+                />
+
                 <label>Membership:</label>
                 <select
                     name="membership"
@@ -147,6 +159,7 @@ async function handleSubmit(event) {
                     onChange={handleChange}
                     required
                 >
+                    <option value="selectAnOption">Select an option</option>
                     <option value="Bronze">
                         Bronze (1 month)
                     </option>

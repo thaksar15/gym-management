@@ -4,7 +4,7 @@ function WeeklyReport({backFromWeekly}){
     return(
         <div className="weekly-page">
 
-            <h1>Weekly Report</h1>
+            <h1>Weekly Report(Non Operational)</h1>
             <h2>14–20 September 2026</h2>
 
             <div className="weekly-card">
