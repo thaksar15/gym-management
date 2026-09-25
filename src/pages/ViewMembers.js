@@ -7,7 +7,7 @@ function ViewMembers({ backFromViewMem }) {
 
     useEffect(() => {
 
-        fetch("http://localhost:5000/members")
+        fetch("https://gym-management-1-dfc5.onrender.com/members")
             .then(response => response.json())
             .then(data => {
                 setMembers(data);

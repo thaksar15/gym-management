@@ -5,7 +5,7 @@ function Payments({backFromPay}){
     async function handlePayment(){
 
     const response = await fetch(
-        "http://localhost:5000/create-checkout-session",
+        "https://gym-management-1-dfc5.onrender.com/create-checkout-session",
         {
             method: "POST"
         }

@@ -38,7 +38,7 @@ async function handleSubmit(event) {
 
     try {
 
-        const response = await fetch("http://localhost:5000/users", {
+        const response = await fetch("https://gym-management-1-dfc5.onrender.com/users", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

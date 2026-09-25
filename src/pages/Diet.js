@@ -7,7 +7,7 @@ function Diet({backFromDiet,userEmail}) {
 
     useEffect(() => {
 
-        fetch(`http://localhost:5000/users/${userEmail}/diet`)
+        fetch(`https://gym-management-1-dfc5.onrender.com/users/${userEmail}/diet`)
             .then(response => response.json())
             .then(data => {
                 setDiet(data.diet);

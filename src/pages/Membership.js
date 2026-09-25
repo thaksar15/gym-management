@@ -7,7 +7,7 @@ function Membership({ backFromMembership, userEmail }) {
 
     useEffect(() => {
 
-        fetch(`http://localhost:5000/users/${userEmail}/membership`)
+        fetch(`https://gym-management-1-dfc5.onrender.com/users/${userEmail}/membership`)
             .then(response => response.json())
             .then(data => {
                 setDetails(data);

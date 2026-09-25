@@ -65,7 +65,7 @@ function Login() {
         try {
 
             const response = await fetch(
-                "http://localhost:5000/login",
+                "https://gym-management-1-dfc5.onrender.com/login",
                 {
                     method: "POST",
                     headers: {

@@ -6,7 +6,7 @@ const [workout, setWorkout] = useState("");
 
 useEffect(() => {
 
-    fetch(`http://localhost:5000/users/${userEmail}/workout`)
+    fetch(`https://gym-management-1-dfc5.onrender.com/users/${userEmail}/workout`)
         .then(response => response.json())
         .then(data => {
             setWorkout(data.workout);

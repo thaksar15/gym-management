@@ -12,7 +12,7 @@ function AssignDiet({ backFromAssignDiet }) {
 
     useEffect(() => {
 
-        fetch("http://localhost:5000/members")
+        fetch("https://gym-management-1-dfc5.onrender.com/members")
             .then(response => response.json())
             .then(data => {
                 setMembers(data);
@@ -47,7 +47,7 @@ ${dinner}
         try {
 
             const response = await fetch(
-                `http://localhost:5000/users/${selectedMember}/diet`,
+                `https://gym-management-1-dfc5.onrender.com/users/${selectedMember}/diet`,
                 {
                     method: "PUT",
                     headers: {

@@ -16,7 +16,7 @@ function AssignWorkout({ backFromAssignWork }) {
 
     useEffect(() => {
 
-        fetch("http://localhost:5000/members")
+        fetch("https://gym-management-1-dfc5.onrender.com/members")
             .then(response => response.json())
             .then(data => {
                 setMembers(data);
@@ -60,7 +60,7 @@ ${sunday}
         try {
 
             const response = await fetch(
-                `http://localhost:5000/users/${selectedMember}/workout`,
+                `https://gym-management-1-dfc5.onrender.com/users/${selectedMember}/workout`,
                 {
                     method: "PUT",
                     headers: {
