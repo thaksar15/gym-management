@@ -12,7 +12,7 @@ useEffect(() => {
             setWorkout(data.workout);
         });
 
-}, []);
+}, [userEmail]);
 
     return(
         <div className="schedule-page">

@@ -13,7 +13,7 @@ function Diet({backFromDiet,userEmail}) {
                 setDiet(data.diet);
             });
 
-    }, []);
+    }, [userEmail]);
 
     return(
         <div className="diet-page">

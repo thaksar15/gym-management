@@ -60,11 +60,7 @@ function backFromMembership() {
     localStorage.removeItem("memberPage");
 }
 
-   function backFromMem(){
-    localStorage.removeItem("memberPage");
-    setShowMembership(false);
-}
-
+ 
     function backFromPay(){
     localStorage.removeItem("memberPage");
     setShowPayments(false);
